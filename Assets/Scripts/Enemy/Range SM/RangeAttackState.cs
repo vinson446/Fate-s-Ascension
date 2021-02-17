@@ -7,6 +7,8 @@ public class RangeAttackState : RangeState
     public override void Enter()
     {
         rangeEnemy.UpdateGameState("Attack");
+
+        SetMoveSpeed(0);
     }
 
     public override void Tick()

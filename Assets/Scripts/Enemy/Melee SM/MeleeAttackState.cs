@@ -7,6 +7,8 @@ public class MeleeAttackState : MeleeState
     public override void Enter()
     {
         meleeEnemy.UpdateGameState("Attack");
+
+        SetMoveSpeed(0);
     }
 
     public override void Tick()

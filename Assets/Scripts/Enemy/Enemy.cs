@@ -7,12 +7,16 @@ public class Enemy : MonoBehaviour
     [Header("State")]
     [SerializeField] string gameState;
 
+    [Header("Movement")]
+    public float moveSpeed;
+
     [Header("Combat Stats")]
     [SerializeField] protected int level;
     [SerializeField] protected int currentHP;
     [SerializeField] protected int maxHP;
     [SerializeField] protected int attack;
     [SerializeField] protected float attackSpeed;
+    protected float nextAttackTime;
     [SerializeField] protected int defense;
 
     [Header("Range Settings")]

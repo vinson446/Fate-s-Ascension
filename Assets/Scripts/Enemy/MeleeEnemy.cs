@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
+    TestPlayerScript player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<TestPlayerScript>();
+    }
+
     public override void Attack()
     {
-        base.Attack();
+        if (Time.time >= nextAttackTime)
+        {
+            nextAttackTime = Time.time + 1 / attackSpeed;
+
+            player.TakeDamage(attack);
+        }
     }
 }
