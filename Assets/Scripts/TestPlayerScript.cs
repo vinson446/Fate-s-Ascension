@@ -12,6 +12,7 @@ public class TestPlayerScript : MonoBehaviour
 
     UIManager uiManager;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,7 @@ public class TestPlayerScript : MonoBehaviour
         Vector3 velocity = Vector3.zero;
         velocity.x = Input.GetAxisRaw("Horizontal");
         velocity.z = Input.GetAxisRaw("Vertical");
-
+       
         charController.Move(velocity * Time.deltaTime * moveSpeed);
     }
 
@@ -35,4 +36,5 @@ public class TestPlayerScript : MonoBehaviour
         hp -= damage;
         uiManager.UpdatePlayerHealth();
     }
+
 }
