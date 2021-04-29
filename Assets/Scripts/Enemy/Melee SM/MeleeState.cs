@@ -6,18 +6,22 @@ using UnityEngine.AI;
 public class MeleeState : State
 {
     protected StateMachine stateMachine;
+
     protected MeleeEnemy meleeEnemy;
     protected NavMeshAgent navMeshAgent;
+    protected Animator animator;
 
-    protected TestPlayerScript player;
+    protected Player player;
 
     private void Awake()
     {
         stateMachine = GetComponent<MeleeSM>();
-        meleeEnemy = GetComponent<MeleeEnemy>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
 
-        player = FindObjectOfType<TestPlayerScript>();
+        meleeEnemy = GetComponentInParent<MeleeEnemy>();
+        navMeshAgent = GetComponentInParent<NavMeshAgent>();
+        animator = GetComponentInParent<Animator>();
+
+        player = FindObjectOfType<Player>();
     }
 
     protected void SetMoveSpeed(float moveSpeed)

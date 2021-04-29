@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MeleeAttackState : MeleeState
 {
+    bool isAttacking;
+
     public override void Enter()
     {
         meleeEnemy.UpdateGameState("Attack");
@@ -13,9 +15,12 @@ public class MeleeAttackState : MeleeState
 
     public override void Tick()
     {
-        CheckRanges();
+        if (!isAttacking)
+        {
+            CheckRanges();
 
-        Attack();
+            Attack();
+        }
     }
 
     public override void Exit()
@@ -25,7 +30,7 @@ public class MeleeAttackState : MeleeState
 
     void CheckRanges()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) > meleeEnemy.attackRange && 
+        if (Vector3.Distance(transform.position, player.transform.position) > meleeEnemy.attackRange &&
             Vector3.Distance(transform.position, player.transform.position) <= meleeEnemy.aggroRange)
         {
             stateMachine.ChangeState<MeleeChaseState>();
@@ -40,7 +45,23 @@ public class MeleeAttackState : MeleeState
     {
         if (Vector3.Distance(transform.position, player.transform.position) <= meleeEnemy.attackRange)
         {
-            meleeEnemy.Attack();
+            StartCoroutine(AttackCoroutine());
         }
+    }
+
+    IEnumerator AttackCoroutine()
+    {
+        isAttacking = true;
+
+        animator.CrossFadeInFixedTime("Attack", 0.2f);
+
+        // wait for animation to actually attack
+        yield return new WaitForSeconds(1.5f);
+
+        meleeEnemy.Attack();
+
+        yield return new WaitForSeconds(1 / meleeEnemy.attackSpeed);
+
+        isAttacking = false;
     }
 }

@@ -7,6 +7,10 @@ public class Player : MonoBehaviour
 {
     [SerializeField] int hp;
     public int HP { get => hp; set => hp = value; }
+    public int attack;
+    public float attackRange;
+
+    public Transform attackPoint;
     public LayerMask whatCanBeClickedOn;
     private NavMeshAgent myAgent;
     [SerializeField] Animator animator;
@@ -90,5 +94,26 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("BasicSlash"); //Play our shout animation from Animator
         }
+
+        Attack();
+    }
+
+    void Attack()
+    {
+        Collider[] colls = Physics.OverlapSphere(attackPoint.position, attackRange);
+        foreach (Collider c in colls)
+        {
+            if (c.gameObject.tag == "Enemy")
+            {
+                Enemy enemy = c.GetComponent<Enemy>();
+                enemy.TakeDamage(attack);
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

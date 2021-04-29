@@ -7,6 +7,7 @@ public class MeleeChaseState : MeleeState
     public override void Enter()
     {
         meleeEnemy.UpdateGameState("Chase");
+        animator.CrossFadeInFixedTime("Moving", 0.2f);
 
         SetMoveSpeed(meleeEnemy.moveSpeed);
     }

@@ -6,18 +6,22 @@ using UnityEngine.AI;
 public class RangeState : State
 {
     protected StateMachine stateMachine;
+
     protected RangeEnemy rangeEnemy;
     protected NavMeshAgent navMeshAgent;
+    protected Animator animator;
 
-    protected TestPlayerScript player;
+    protected Player player;
 
     private void Awake()
     {
         stateMachine = GetComponent<RangeSM>();
-        rangeEnemy = GetComponent<RangeEnemy>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
 
-        player = FindObjectOfType<TestPlayerScript>();
+        rangeEnemy = GetComponentInParent<RangeEnemy>();
+        navMeshAgent = GetComponentInParent<NavMeshAgent>();
+        animator = GetComponentInParent<Animator>();
+
+        player = FindObjectOfType<Player>();
     }
 
     protected void SetMoveSpeed(float moveSpeed)

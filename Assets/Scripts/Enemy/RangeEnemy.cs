@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class RangeEnemy : Enemy
 {
-    TestPlayerScript player;
-
-    private void Start()
-    {
-        player = FindObjectOfType<TestPlayerScript>();
-    }
-
     public override void Attack()
     {
-        if (Time.time >= nextAttackTime)
+        Collider[] colls = Physics.OverlapSphere(transform.position, attackRange);
+        foreach (Collider c in colls)
         {
-            nextAttackTime = Time.time + 1 / attackSpeed;
-
-            player.TakeDamage(attack);
+            if (c.gameObject.tag == "Player")
+            {
+                Player player = c.GetComponent<Player>();
+                player.TakeDamage(attack);
+            }
         }
     }
 }

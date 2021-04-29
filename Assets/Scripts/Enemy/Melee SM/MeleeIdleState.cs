@@ -7,6 +7,7 @@ public class MeleeIdleState : MeleeState
     public override void Enter()
     {
         meleeEnemy.UpdateGameState("Idle");
+        animator.CrossFadeInFixedTime("Idle", 0.2f);
     }
 
     public override void Tick()

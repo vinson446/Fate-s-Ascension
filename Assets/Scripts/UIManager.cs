@@ -8,12 +8,11 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Slider hpBar;
     [SerializeField] TextMeshProUGUI hpText;
-    TestPlayerScript player;
+    [SerializeField] Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<TestPlayerScript>();
         SetPlayerHealth();
     }
 
