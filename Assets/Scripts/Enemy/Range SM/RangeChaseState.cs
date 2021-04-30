@@ -8,6 +8,7 @@ public class RangeChaseState : RangeState
     public override void Enter()
     {
         rangeEnemy.UpdateGameState("Chase");
+        animator.CrossFadeInFixedTime("Moving", 0.2f);
 
         SetMoveSpeed(rangeEnemy.moveSpeed);
     }

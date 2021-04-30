@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RangeAttackState : RangeState
 {
+    bool isAttacking;
+
     public override void Enter()
     {
         rangeEnemy.UpdateGameState("Attack");
@@ -13,9 +15,12 @@ public class RangeAttackState : RangeState
 
     public override void Tick()
     {
-        CheckRanges();
+        if (!isAttacking)
+        {
+            CheckRanges();
 
-        Attack();
+            Attack();
+        }
     }
 
     public override void Exit()
@@ -40,7 +45,24 @@ public class RangeAttackState : RangeState
     {
         if (Vector3.Distance(transform.position, player.transform.position) <= rangeEnemy.attackRange)
         {
-            rangeEnemy.Attack();
+            StartCoroutine(AttackCoroutine());
         }
+    }
+
+    IEnumerator AttackCoroutine()
+    {
+        isAttacking = true;
+
+        transform.parent.LookAt(player.transform);
+        animator.CrossFadeInFixedTime("Attack", 0.2f);
+
+        // wait for animation to actually attack
+        yield return new WaitForSeconds(1.5f);
+
+        rangeEnemy.Attack();
+
+        yield return new WaitForSeconds(1 / rangeEnemy.attackSpeed);
+
+        isAttacking = false;
     }
 }

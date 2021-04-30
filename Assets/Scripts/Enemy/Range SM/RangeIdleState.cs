@@ -7,6 +7,7 @@ public class RangeIdleState : RangeState
     public override void Enter()
     {
         rangeEnemy.UpdateGameState("Idle");
+        animator.CrossFadeInFixedTime("Idle", 0.2f);
     }
 
     public override void Tick()

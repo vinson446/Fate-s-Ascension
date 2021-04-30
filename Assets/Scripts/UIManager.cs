@@ -8,6 +8,10 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Slider hpBar;
     [SerializeField] TextMeshProUGUI hpText;
+    [SerializeField] GameObject dialogueObj;
+    [SerializeField] TextMeshProUGUI dialogueText;
+    [TextArea(0, 10)]
+    [SerializeField] string dialogue;
     [SerializeField] Player player;
 
     // Start is called before the first frame update
@@ -38,5 +42,19 @@ public class UIManager : MonoBehaviour
         hpBar.value = player.HP;
 
         hpText.text = hpBar.value + " / " + hpBar.maxValue;
+    }
+
+    public void ShowDialogue(bool show)
+    {
+        if (show)
+        {
+            dialogueObj.SetActive(true);
+            dialogueText.text = dialogue;
+        }
+        else
+        {
+            dialogueObj.SetActive(false);
+            dialogueText.text = "";
+        }
     }
 }
