@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: ee408ac84977ac243bf619afd1e223a0
   - enabled: 1
-    path: Assets/Scenes/Vinson's Scene.unity
-    guid: ab280da3a6eb8004aa5fd302894fe3a2
+    path: Assets/Scenes/Game.unity
+    guid: 8e97faf81b8d02b4e89c3f458791a983
   m_configObjects: {}

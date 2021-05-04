@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     public Transform attackPoint;
     public LayerMask whatCanBeClickedOn;
     private NavMeshAgent myAgent;
+
+    private AudioSource audioSrc;
+    public AudioClip swordSwing;
+
     [SerializeField] Animator animator;
     private double waitTimerToMove = 0;
     UIManager uiManager;
@@ -22,6 +26,7 @@ public class Player : MonoBehaviour
     {
         myAgent = GetComponent<NavMeshAgent>();
         uiManager = FindObjectOfType<UIManager>();
+        audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -95,6 +100,8 @@ public class Player : MonoBehaviour
             animator.SetTrigger("BasicSlash"); //Play our shout animation from Animator
         }
 
+        audioSrc.clip = swordSwing;
+        audioSrc.Play();
         Attack();
     }
 
