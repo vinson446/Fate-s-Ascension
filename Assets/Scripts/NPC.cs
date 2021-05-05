@@ -24,6 +24,7 @@ public class NPC : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             uiManager.ShowDialogue(true);
+            uiManager.SetupEnemiesText();
         }
     }
 

@@ -6,7 +6,7 @@ public class MeleeEnemy : Enemy
 {
     public override void Attack()
     {
-        Collider[] colls = Physics.OverlapSphere(attackPoint.position, attackRange);
+        Collider[] colls = Physics.OverlapSphere(attackPoint.position, attackRange / 2);
         foreach (Collider c in colls)
         {
             if (c.gameObject.tag == "Player")

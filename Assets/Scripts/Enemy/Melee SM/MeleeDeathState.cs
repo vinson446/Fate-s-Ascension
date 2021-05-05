@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class MeleeDeathState : MeleeState
 {
+    UIManager uiManager;
+
     public override void Enter()
     {
+        uiManager = FindObjectOfType<UIManager>();
+
         Die();
     }
 
     void Die()
     {
+        uiManager.UpdateEnemiesText();
+
         animator.CrossFadeInFixedTime("Death", 0.2f);
 
         navMeshAgent.enabled = false;
